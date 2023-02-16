@@ -8,13 +8,13 @@ function Task(props) {
 	const [description, setDescription] = useState(props.description)
 
 	function handleCheckboxChange() {
-		const newCompleted = !completed
-		setCompleted(newCompleted)
-		updateCompleted(props.id, newCompleted)
+		setCompleted(!completed)
+		updateCompleted(props.id, !completed)
 	}
 
 	function handleDescriptionChange(event) {
 		setDescription(event.target.value)
+		updateDescription(props.id, event.target.value)
 	}
 
 	function updateCompleted(id, completed) {
@@ -29,7 +29,21 @@ function Task(props) {
 			body: JSON.stringify(data),
 		})
 			.then((response) => response.json())
-			.then((data) => console.log(data))
+			.catch((error) => console.log(error))
+	}
+
+	function updateDescription(id, description) {
+		const url = 'http://localhost:8080/task/updateDescription'
+		const data = { id, description }
+
+		fetch(url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
+		})
+			.then((response) => response.json())
 			.catch((error) => console.log(error))
 	}
 

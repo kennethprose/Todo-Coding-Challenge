@@ -29,9 +29,9 @@ public class Controller {
         return taskService.getAllTasks();
     }
 
-    @PostMapping("/updateTask")
-    public void updateTask(@RequestBody Task task) {
-        taskService.updateTask(task.getId(), task.getDescription());
+    @PostMapping("/updateDescription")
+    public void updateDescription(@RequestBody Task task) {
+        taskService.updateDescription(task.getId(), task.getDescription());
     }
 
     @PostMapping("/updateCompleted")
