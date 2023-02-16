@@ -31,7 +31,7 @@ public class Controller {
 
     @PostMapping("/updateTask")
     public void updateTask(@RequestBody Task task) {
-        taskService.updateTask(task.getId(), task.getDescription(), task.getDueDate());
+        taskService.updateTask(task.getId(), task.getDescription());
     }
 
     @PostMapping("/updateCompleted")

@@ -13,7 +13,7 @@ public class Task {
     private int id;
     private String description;
     private boolean completed;
-    private String dueDate;
+    //private String dueDate;
 
     public Task() {
     }
@@ -42,6 +42,7 @@ public class Task {
         this.completed = completed;
     }
 
+    /*
     public String getDueDate() {
         return dueDate;
     }
@@ -49,4 +50,5 @@ public class Task {
     public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
     }
+     */
 }

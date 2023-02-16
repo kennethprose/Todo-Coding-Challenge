@@ -26,10 +26,9 @@ public class TaskService {
         return taskRepo.findAll();
     }
 
-    public void updateTask(int id, String description, String dueDate) {
+    public void updateTask(int id, String description) {
         Task task = taskRepo.findById(id).get();
         task.setDescription(description);
-        task.setDueDate(dueDate);
         taskRepo.save(task);
     }
 

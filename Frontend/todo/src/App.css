@@ -3,3 +3,17 @@
 	height: 100vh;
 	width: 100vw;
 }
+
+.data-col {
+	width: 60%;
+	margin: auto;
+}
+
+.title {
+	font-size: 4rem;
+	font-weight: bold;
+	text-align: center;
+	color: #fff;
+	margin: 0;
+	padding: 1rem;
+}

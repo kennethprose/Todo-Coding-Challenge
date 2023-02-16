@@ -10,6 +10,7 @@ function Task(props) {
 		setCompleted(!completed)
 	}
 
+	/*
 	const [dueDate, setDueDate] = useState(props.dueDate)
 
 	const handleDateChange = (date) => {
@@ -22,6 +23,7 @@ function Task(props) {
 
 		console.log(dateString)
 	}
+    */
 
 	const [description, setDescription] = useState(props.description)
 
@@ -42,11 +44,6 @@ function Task(props) {
 					className='task-description'
 					value={description}
 					onChange={handleDescriptionChange}
-				/>
-				<DatePicker
-					selected={dueDate}
-					onChange={handleDateChange}
-					className='task-due-date'
 				/>
 			</div>
 		</div>
