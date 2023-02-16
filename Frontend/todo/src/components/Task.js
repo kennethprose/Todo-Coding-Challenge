@@ -5,27 +5,27 @@ import '../styles/Task.css'
 
 function Task(props) {
 	const [completed, setCompleted] = useState(props.completed)
+	const [description, setDescription] = useState(props.description)
 
 	function handleCheckboxChange() {
 		setCompleted(!completed)
-	}
 
-	/*
-	const [dueDate, setDueDate] = useState(props.dueDate)
+		const data = {
+			id: props.id,
+			completed: !completed,
+		}
 
-	const handleDateChange = (date) => {
-		setDueDate(date)
-		const dateString = date.toLocaleDateString('en-US', {
-			year: 'numeric',
-			month: '2-digit',
-			day: '2-digit',
+		fetch('http://localhost:8080/task/updateCompleted', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(data),
 		})
-
-		console.log(dateString)
+			.then((response) => response.json())
+			.then((data) => console.log(data))
+			.catch((error) => console.log(error))
 	}
-    */
-
-	const [description, setDescription] = useState(props.description)
 
 	function handleDescriptionChange(event) {
 		setDescription(event.target.value)
