@@ -8,14 +8,20 @@ function Task(props) {
 	const [description, setDescription] = useState(props.description)
 
 	function handleCheckboxChange() {
-		setCompleted(!completed)
+		const newCompleted = !completed
+		setCompleted(newCompleted)
+		updateCompleted(props.id, newCompleted)
+	}
 
-		const data = {
-			id: props.id,
-			completed: !completed,
-		}
+	function handleDescriptionChange(event) {
+		setDescription(event.target.value)
+	}
 
-		fetch('http://localhost:8080/task/updateCompleted', {
+	function updateCompleted(id, completed) {
+		const url = 'http://localhost:8080/task/updateCompleted'
+		const data = { id, completed }
+
+		fetch(url, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -25,10 +31,6 @@ function Task(props) {
 			.then((response) => response.json())
 			.then((data) => console.log(data))
 			.catch((error) => console.log(error))
-	}
-
-	function handleDescriptionChange(event) {
-		setDescription(event.target.value)
 	}
 
 	return (
@@ -45,6 +47,9 @@ function Task(props) {
 					value={description}
 					onChange={handleDescriptionChange}
 				/>
+				<button className='task-delete' onClick={props.onDelete}>
+					Delete
+				</button>
 			</div>
 		</div>
 	)
