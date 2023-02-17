@@ -2,22 +2,28 @@ import './App.css'
 import { useEffect, useState } from 'react'
 import Task from './components/Task'
 import AddTask from './components/AddTask'
+import { API_BASE_URL } from './config'
 
 function App() {
 	const [tasks, setTasks] = useState([])
 
 	useEffect(() => {
-		fetch('http://localhost:8080/task/getAllTasks')
+		const url = API_BASE_URL + '/task/getAllTasks'
+
+		fetch(url)
 			.then((response) => response.json())
 			.then((data) => setTasks(data))
 			.catch((error) => console.log(error))
 	}, [])
 
 	function handleDelete(id) {
-		fetch('http://localhost:8080/task/deleteTask', {
+		const url = API_BASE_URL + '/task/deleteTask'
+		const data = { id }
+
+		fetch(url, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ id: id }),
+			body: JSON.stringify(data),
 		})
 			.then((response) => response.json())
 			.then(setTasks((tasks) => tasks.filter((task) => task.id !== id)))
@@ -25,15 +31,16 @@ function App() {
 	}
 
 	function handleAddNewTask(description) {
-		fetch('http://localhost:8080/task/create', {
+		const url = API_BASE_URL + '/task/create'
+		const data = { description }
+
+		fetch(url, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ description: description }),
+			body: JSON.stringify(data),
 		})
 			.then((response) => response.json())
-			.then((newTask) => {
-				setTasks((tasks) => [...tasks, newTask])
-			})
+			.then((newTask) => setTasks([...tasks, newTask]))
 			.catch((error) => console.log(error))
 	}
 
@@ -41,7 +48,8 @@ function App() {
 		<div className='App'>
 			<div className='data-col'>
 				<h1 className='title'>Todo List:</h1>
-				<AddTask submitNewTask={handleAddNewTask}></AddTask>
+				<AddTask submitNewTask={handleAddNewTask} />
+				<br />
 				{tasks.map((task) => (
 					<Task
 						key={task.id}

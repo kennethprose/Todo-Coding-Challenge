@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import '../styles/Task.css'
+import { API_BASE_URL } from '../config'
 
 function Task(props) {
 	const [completed, setCompleted] = useState(props.completed)
@@ -18,7 +19,7 @@ function Task(props) {
 	}
 
 	function updateCompleted(id, completed) {
-		const url = 'http://localhost:8080/task/updateCompleted'
+		const url = API_BASE_URL + '/task/updateCompleted'
 		const data = { id, completed }
 
 		fetch(url, {
@@ -33,7 +34,7 @@ function Task(props) {
 	}
 
 	function updateDescription(id, description) {
-		const url = 'http://localhost:8080/task/updateDescription'
+		const url = API_BASE_URL + '/task/updateDescription'
 		const data = { id, description }
 
 		fetch(url, {
