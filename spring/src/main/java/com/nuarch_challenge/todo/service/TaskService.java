@@ -14,8 +14,8 @@ public class TaskService {
     @Autowired
     private TaskRepo taskRepo;
 
-    public void createTask(Task task) {
-        taskRepo.save(task);
+    public Task createTask(Task task) {
+         return taskRepo.save(task);
     }
 
     public Task getTask(int id) {

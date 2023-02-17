@@ -1,6 +1,7 @@
 import './App.css'
 import { useEffect, useState } from 'react'
 import Task from './components/Task'
+import AddTask from './components/AddTask'
 
 function App() {
 	const [tasks, setTasks] = useState([])
@@ -23,10 +24,24 @@ function App() {
 			.catch((error) => console.log(error))
 	}
 
+	function handleAddNewTask(description) {
+		fetch('http://localhost:8080/task/create', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ description: description }),
+		})
+			.then((response) => response.json())
+			.then((newTask) => {
+				setTasks((tasks) => [...tasks, newTask])
+			})
+			.catch((error) => console.log(error))
+	}
+
 	return (
 		<div className='App'>
 			<div className='data-col'>
 				<h1 className='title'>Todo List:</h1>
+				<AddTask submitNewTask={handleAddNewTask}></AddTask>
 				{tasks.map((task) => (
 					<Task
 						key={task.id}
