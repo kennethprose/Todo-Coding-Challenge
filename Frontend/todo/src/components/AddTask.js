@@ -10,6 +10,7 @@ function AddTask(props) {
 
 	function handleSubmit() {
 		props.submitNewTask(description)
+		setDescription('')
 	}
 
 	return (
